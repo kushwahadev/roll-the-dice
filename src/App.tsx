@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ImageSourcePropType, Image, Pressable } from 'react-native';
 import React,{useState} from 'react';
+import { trigger } from 'react-native-haptic-feedback';
 import type { PropsWithChildren } from 'react';
 import diceOne from '../assets/One.png';
 import diceTwo from '../assets/Two.png';
@@ -12,6 +13,12 @@ type DiceProps =  PropsWithChildren <{
   imageUrl : ImageSourcePropType,
 
 }>
+
+// Optional configuration
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
 const Dice = ({imageUrl}: DiceProps) :JSX.Element => {
   return (
@@ -37,6 +44,8 @@ export default function App() : JSX.Element {
       default: setDiceImage(diceOne);
         break;
     }
+
+    trigger('impactLight', options);
   };
 
 
